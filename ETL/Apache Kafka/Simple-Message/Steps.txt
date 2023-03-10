@@ -1,0 +1,49 @@
+Download Kafka, by running the command below:
+
+Step 1: wget https://archive.apache.org/dist/kafka/2.8.0/kafka_2.12-2.8.0.tgz
+        Extract kafka from the zip file by running the command below.
+        tar -xzf kafka_2.12-2.8.0.tgz
+
+        This creates a new directory ‘kafka_2.12-2.8.0’ in the current directory.
+
+Step 2: ZooKeeper is required for Kafka to work. Start the ZooKeeper server.
+
+        cd kafka_2.12-2.8.0
+        bin/zookeeper-server-start.sh config/zookeeper.properties
+
+Step 3: Start a new terminal.
+        Run the commands below. This will start the Kafka message broker service.
+
+        cd kafka_2.12-2.8.0
+        bin/kafka-server-start.sh config/server.properties
+
+Step 4: Create a topic (Start a new terminal)
+        Create a topic named "example1":
+
+        cd kafka_2.12-2.8.0
+        bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
+
+        See list of topics using the following command:
+
+        bin/kafka-topics.sh --list --zookeeper localhost:2181 test
+
+
+Step 5: Run consumer and producer
+        In separate command shells, run the following:
+
+        python consumer.py
+        This is a consumer of the messages sent through Kafka. Simple writing to CSV of the streams is implemented.
+
+        Note: Press CTRL + C to send KeyboardInterrupt to exit the process. Alternatively, close the shell session.
+
+        python producer.py
+        Producer of messages. Key in any valid string to send. Type "quit" to exit.
+
+        You should now see the shell running consumer.py displaying the messages from Kafka!
+
+Step 6: Tear things down
+
+        bin/kafka-server-stop.sh
+        bin/zookeeper-server-stop.sh
+
+        This would terminate both server processes.
