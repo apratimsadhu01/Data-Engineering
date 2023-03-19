@@ -12,7 +12,9 @@ producer = KafkaProducer()
 
 base_path = os.getcwd()
 print(base_path)
-os.mkdir("local_dir")
+if not os.path.exists("local_dir"):
+    os.mkdir("local_dir")
+    print("ok")
 source = base_path+'/server/'
 destination = base_path+'/local_dir/'
 
