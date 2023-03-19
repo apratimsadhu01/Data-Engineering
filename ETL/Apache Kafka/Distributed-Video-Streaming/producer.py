@@ -64,12 +64,12 @@ def publish_camera():
         print("\nExisting.")
         sys.exit(1)
 
-    camer.release()
+    camera.release()
 
 
 if __name__ == '__main__':
     """
-    Producer will publish to Kafka Server a video file given as a system arg. 
+    Producer will publish to Kafka Server a video file given as a system arg.
     Otherwise it will default by streaming webcam feed.
     """
     if(len(sys.argv)>1):
